@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  llama-service:
+    image: ghcr.io/alexbidenko/neural-translator/application:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_NAME=some-llama-model
+      - MAX_NEW_TOKENS=128
+      - TEMPERATURE=0.7
+      - TOP_P=0.9
+    volumes:
+      - model_data:/models
+    # Для использования GPU:
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  model_data:
