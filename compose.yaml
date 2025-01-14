@@ -6,12 +6,12 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - MODEL_NAME=some-llama-model
+      - MODEL_NAME=/models/Llama-3.3-70B-Instruct-abliterated.safetensors
       - MAX_NEW_TOKENS=128
       - TEMPERATURE=0.7
       - TOP_P=0.9
     volumes:
-      - model_data:/models
+      - /home/ubuntu/models:/models
     # Для использования GPU:
     deploy:
       replicas: 1
@@ -23,6 +23,3 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
-
-volumes:
-  model_data:
