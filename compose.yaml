@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  llama-service:
+  application:
     image: ghcr.io/alexbidenko/neural-translator/application:latest
     ports:
       - "8000:8000"
@@ -12,11 +12,11 @@ services:
       - TOP_P=0.9
     volumes:
       - /home/ubuntu/models:/models
-    # Для использования GPU:
     deploy:
       replicas: 1
       restart_policy:
         condition: any
+      # Для использования GPU:
       resources:
         reservations:
           devices:

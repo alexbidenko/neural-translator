@@ -55,6 +55,6 @@ jobs:
           chmod 400 ~/.ssh/id_rsa
 
       - name: Deploy 🚀
-        run:  docker stack deploy --prune --with-registry-auth -c compose.yaml neural-translator
+        run: docker stack deploy --prune --with-registry-auth -c compose.yaml neural-translator
         env:
           DOCKER_HOST: ssh://${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
